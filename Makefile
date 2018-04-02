@@ -2,7 +2,7 @@ install:
 	npm install
 
 make run:
-	npm run babel-node -- src/bin/gendiff.js
+	npm run babel-node dist/bin/gendiff.js
 
 lint:
 	npm run eslint ".js" "src/"
@@ -17,4 +17,4 @@ build:
 	npm run build
 
 test:
-	npm test
+	npm test --watch
