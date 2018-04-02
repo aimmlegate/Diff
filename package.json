@@ -1,6 +1,6 @@
 {
   "name": "aimml-gendiff",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "Compares two configuration files and shows a difference",
   "main": "index.js",
   "scripts": {
@@ -24,7 +24,9 @@
     "dist"
   ],
   "homepage": "https://github.com/aimmlegate/project-lvl2-s233#readme",
-  "bin": {},
+  "bin": {
+    "gendiff": "dist/bin/gendiff.js"
+  },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "*",
