@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "babel-node": "babel-node",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "build": "NODE_ENV=production babel src --out-dir dist --source-maps inline",
     "prepublishOnly": "npm run build",
     "eslint": "eslint",
@@ -27,6 +27,9 @@
   "bin": {
     "gendiff": "dist/bin/gendiff.js"
   },
+  "jest": {
+    "testEnvironment": "node"
+  },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "*",
@@ -37,7 +40,9 @@
     "eslint": "*",
     "eslint-config-airbnb-base": "*",
     "eslint-plugin-import": "*",
-    "flow-bin": "^0.66.0"
+    "flow-bin": "^0.66.0",
+    "jest": "^22",
+    "jest-cli": "^22.4.2"
   },
   "dependencies": {
     "commander": "^2.15.1"
