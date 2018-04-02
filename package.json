@@ -1,0 +1,43 @@
+{
+  "name": "aimml-gendiff",
+  "version": "0.0.1",
+  "description": "Compares two configuration files and shows a difference",
+  "main": "index.js",
+  "scripts": {
+    "babel-node": "babel-node",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "NODE_ENV=production babel src --out-dir dist --source-maps inline",
+    "prepublishOnly": "npm run build",
+    "eslint": "eslint",
+    "flow": "flow"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aimmlegate/project-lvl2-s233"
+  },
+  "author": "Andrey Lukin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aimmlegate/project-lvl2-s233/issues"
+  },
+  "files": [
+    "dist"
+  ],
+  "homepage": "https://github.com/aimmlegate/project-lvl2-s233#readme",
+  "bin": {},
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "*",
+    "babel-eslint": "*",
+    "babel-preset-env": "*",
+    "babel-preset-flow": "^6.23.0",
+    "babel-preset-stage-0": "*",
+    "eslint": "*",
+    "eslint-config-airbnb-base": "*",
+    "eslint-plugin-import": "*",
+    "flow-bin": "^0.66.0"
+  },
+  "dependencies": {
+    "commander": "^2.15.1"
+  }
+}
