@@ -45,6 +45,8 @@
     "jest-cli": "^22.4.2"
   },
   "dependencies": {
-    "commander": "^2.15.1"
+    "commander": "^2.15.1",
+    "eslint-plugin-flowtype": "^2.46.1",
+    "eslint-plugin-jest": "^21.15.0"
   }
 }
