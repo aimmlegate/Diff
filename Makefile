@@ -17,4 +17,4 @@ build:
 	npm run build
 
 test:
-	npm test --watch
+	npm test
