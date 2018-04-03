@@ -25,7 +25,7 @@ const parse = (ast: Object) => {
   return `{${result}\n}`;
 };
 
-export default (pathToFile1: string, pathToFile2: string) => {
+export default (pathToFile1: any, pathToFile2: any) => {
   const after = JSON.parse(fs.readFileSync(pathToFile1));
   const before = JSON.parse(fs.readFileSync(pathToFile2));
   const oldKeys = Object.keys(before);
