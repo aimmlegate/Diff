@@ -2,7 +2,7 @@
 
 import _ from 'lodash';
 
-export default (before: object, after: object) => {
+export default (before: Object, after: Object) => {
   const oldKeys = Object.keys(before);
   const newKeys = Object.keys(after);
   const uniqKeys = new Set([...oldKeys, ...newKeys]);
