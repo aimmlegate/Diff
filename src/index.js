@@ -38,3 +38,4 @@ export default (pathToFile1: string, pathToFile2: string) => {
   console.log(parse(ast));
   return parse(ast);
 };
+
