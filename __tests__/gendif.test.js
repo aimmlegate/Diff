@@ -2,8 +2,8 @@ import fs from 'fs';
 import gendif from '../src';
 
 
-test('half', () => {
-  const expected = '__tests__/__fixtures__/result.txt';
-  const received = gendif('/mnt/o/learn/hexlet/before.json', '/mnt/o/learn/hexlet/after.json');
+test('plain', () => {
+  const expected = '__tests__/__fixtures__/result-plain.txt';
+  const received = gendif('__tests__/__fixtures__/after-plain.json', '__tests__/__fixtures__/before-plain.json');
   expect(received).toBe(fs.readFileSync(expected, 'utf-8'));
 });
