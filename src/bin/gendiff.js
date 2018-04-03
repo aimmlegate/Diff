@@ -8,7 +8,7 @@ commander
   .description('Compares two configuration files and shows a difference.')
   .arguments('<firstConfig>')
   .arguments('<secondConfig>')
-  .action((firstConfig, secondConfig) => gendif(firstConfig, secondConfig))
+  .action((firstConfig, secondConfig) => console.log(gendif(firstConfig, secondConfig)))
   .option('-f, --format [type]', 'Output format')
   .parse(process.argv);
 
