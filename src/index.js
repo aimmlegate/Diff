@@ -26,8 +26,8 @@ const parse = (ast: Object) => {
 };
 
 export default (pathToFile1: any, pathToFile2: any) => {
-  const after = JSON.parse(fs.readFileSync(pathToFile1.toString()));
-  const before = JSON.parse(fs.readFileSync(pathToFile2.toString()));
+  const after = JSON.parse(fs.readFileSync(pathToFile1).toString());
+  const before = JSON.parse(fs.readFileSync(pathToFile2).toString());
   const oldKeys = Object.keys(before);
   const newKeys = Object.keys(after);
   const metaKeys = new Set([...oldKeys, ...newKeys]);
