@@ -14,5 +14,6 @@ extends:
   - 'plugin:jest/recommended'
   - 'plugin:flowtype/recommended'
   
+  
 rules:
   no-console: 0
