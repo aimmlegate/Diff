@@ -1,7 +1,7 @@
 // @flow
 
 import _ from 'lodash';
-import parse from './parsers';
+import getParse from './parsers';
 import readFile from './read-file';
 
 const getDiffLine = (prefix: string, key: string, val: string) => `${prefix} ${key}: ${val}`;
@@ -28,10 +28,10 @@ const createString = (before: Object, after: Object) => {
 };
 
 export default (path1: string, path2: string) => {
-  const beforeFile = readFile(path1);
-  const afterFile = readFile(path2);
-  const before = parse(beforeFile.ext)(beforeFile.data);
-  const after = parse(afterFile.ext)(afterFile.data);
+  const confBeforeFile = readFile(path1);
+  const confAfterFile = readFile(path2);
+  const before = getParse(confBeforeFile.ext)(confBeforeFile.data);
+  const after = getParse(confAfterFile.ext)(confAfterFile.data);
   return createString(before, after);
 };
 
