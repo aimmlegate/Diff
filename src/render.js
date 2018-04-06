@@ -12,13 +12,13 @@ const renderObj = (val, localDeep) => {
   return `{\n${values}\n${localDeep}}`;
 };
 
-const renderAst = (ast, deep = '') => {
+const render = (ast, deep = '') => {
   const moreDeep = deep + genSpace(4);
-  const selectLine = {
+  const getStrGen = {
     nested: node =>
       [
         `${deep}${infoChar.none}${node.key}: {`,
-        `${renderAst(node.children, moreDeep)}\n${deep}${infoChar.none}}`,
+        `${render(node.children, moreDeep)}\n${deep}${infoChar.none}}`,
       ],
     added: node =>
       [`${deep}${infoChar.add}${node.key}: ${renderObj(node.value, moreDeep)}`],
@@ -32,8 +32,8 @@ const renderAst = (ast, deep = '') => {
         `${deep}${infoChar.remov}${node.key}: ${renderObj(node.oldValue, moreDeep)}`,
       ],
   };
-  const resultArray = ast.reduce((acc, el) => [...acc, selectLine[el.type](el)], []);
+  const resultArray = ast.reduce((acc, el) => [...acc, getStrGen[el.type](el)], []);
   return `${_.flatten(resultArray).join('\n')}`;
 };
 
-export default diff => `{\n${renderAst(diff)}\n}`;
+export default diff => `{\n${render(diff)}\n}`;
