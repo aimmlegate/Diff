@@ -12,3 +12,9 @@ test('yaml', () => {
   const received = gendif('__tests__/__fixtures__/yml/before.yaml', '__tests__/__fixtures__/yml/after.yaml');
   expect(received).toEqual(fs.readFileSync(expected, 'utf-8'));
 });
+
+test('yaml-render-plain', () => {
+  const expected = '__tests__/__fixtures__/result-render-plain.txt';
+  const received = gendif('__tests__/__fixtures__/yml/before.yaml', '__tests__/__fixtures__/yml/after.yaml', 'plain');
+  expect(received).toEqual(fs.readFileSync(expected, 'utf-8'));
+});
