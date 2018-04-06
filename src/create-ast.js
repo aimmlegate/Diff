@@ -29,7 +29,6 @@ const buildAst = (before, after) => {
   });
 };
 
-const infoChar = { add: '+', remov: '-', none: ' ' };
 
 const createLine = (val, deep = ' ') => {
   if (!_.isObject(val)) return val;
@@ -39,21 +38,35 @@ const createLine = (val, deep = ' ') => {
   return `{\n${values}\n}`;
 };
 
-const renderAst = (ast, deps = ' ') => {
+const renderObj = (val) => {
+  if (!_.isObject(val)) return val;
+  const keys = _.keys(val);
+  return keys.map(key => `\n${key}: ${val[key]}`);
+};
+
+const infoChar = { add: '+', remov: '-', none: ' ' };
+
+const parseAst = (ast, deep = ' ') => {
   const selectLine = {
-    added: node => [`${deps}${infoChar.add} ${node.key}: ${createLine(node.value, deps)}`],
-    deleted: node => [`${deps}${infoChar.remov} ${node.key}: ${createLine(node.value, deps)}`],
-    update: node => [
-      `${deps}${infoChar.add} ${node.key}: ${createLine(node.value, deps)}`,
-      `${deps}${infoChar.remov} ${node.key}: ${createLine(node.oldValue, deps)}`,
-    ],
-    unchanged: node => [`${deps}${infoChar.none} ${node.key}: ${createLine(node.children, deps)}`],
-    nested: node => [`${deps}${infoChar.none} ${node.key}: ${renderAst(node.children, deps.repeat(2))}`],
+    nested: node =>
+      [
+        `${deep}${infoChar.none} ${node.key}:`,
+        `${parseAst(node.children, deep.repeat(2))}\n${deep}}`,
+      ],
+    added: node =>
+      [`${deep}${infoChar.add} ${node.key}: ${renderObj(node.value)}`],
+    deleted: node =>
+      [`${deep}${infoChar.remov} ${node.key}: ${renderObj(node.value)}`],
+    unchanged: node =>
+      [`${deep}${infoChar.none} ${node.key}: ${renderObj(node.value)}`],
+    updated: node =>
+      [
+        `${deep}${infoChar.remov} ${node.key}: ${renderObj(node.oldValue)}`,
+        `${deep}${infoChar.add} ${node.key}: ${renderObj(node.value)}`,
+      ],
   };
-  const result = ast.reduce((acc, node) => {
-    return [...acc, selectLine[node.type](node)];
-  }, []);
-  return `{\n${_.flatten(result).join('\n')}\n}`;
+  const resultArray = ast.reduce((acc, el) => [...acc, selectLine[el.type](el)], []);
+  return _.flatten(resultArray).join('\n');
 };
 
 export default (path1: string, path2: string) => {
@@ -61,7 +74,6 @@ export default (path1: string, path2: string) => {
   const confAfterFile = readFile(path2);
   const before = getParse(confBeforeFile.ext)(confBeforeFile.data);
   const after = getParse(confAfterFile.ext)(confAfterFile.data);
-  //console.log(JSON.stringify(buildAst(before, after)));
-  console.log(renderAst(buildAst(before, after)));  
+  console.log(parseAst(buildAst(before, after)));
 };
 
