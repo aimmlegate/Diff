@@ -9,7 +9,7 @@ const renderObj = (val, localDeep) => {
   const keys = _.keys(val);
   const values = keys.map(key =>
     `${localDeep}${infoChar.none}${key}: ${val[key]}`).join('\n');
-  return `{\n${values}\n${localDeep}}`;
+  return `{\n${values}\n${localDeep.slice(2)}}`;
 };
 
 const render = (ast, deep = '') => {

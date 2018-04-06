@@ -4,7 +4,7 @@
      - setting2: 200
      + setting3: {
            key: value
-        }
+      }
      - setting3: true
        setting6: {
            key: value
@@ -13,7 +13,7 @@
      + setting4: blah blah
      + setting5: {
            key5: value5
-        }
+      }
    }
    group1: {
      + baz: bars
@@ -22,12 +22,12 @@
      + nest: str
      - nest: {
            key: value
-        }
+      }
    }
  - group2: {
        abc: 12345
-    }
+  }
  + group3: {
        fee: 100500
-    }
+  }
 }
