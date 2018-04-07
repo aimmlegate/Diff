@@ -1,3 +1,4 @@
+// @flow
 
 import fs from 'fs';
 import path from 'path';
@@ -6,7 +7,7 @@ import { safeLoad } from 'js-yaml';
 import buildDiff from './buid-diff';
 import { renderTree, renderPlain } from './renders';
 
-const readFile = (filePatch) => {
+const readFile = (filePatch: string) => {
   const data = fs.readFileSync(filePatch).toString();
   const ext = path.extname(filePatch);
   return { data, ext };
@@ -19,7 +20,7 @@ const parsers = {
   '.ini': ini.parse,
 };
 
-const getParse = format => (data) => {
+const getParse = (format: string) => (data: any) => {
   const parse = parsers[format];
   if (!parse) {
     throw new Error(`unkown format: ${format}`);
@@ -28,7 +29,7 @@ const getParse = format => (data) => {
 };
 
 
-export default (path1, path2, output = 'tree') => {
+export default (path1: string, path2: string, output: string = 'tree') => {
   const confBeforeFile = readFile(path1);
   const confAfterFile = readFile(path2);
   const before = getParse(confBeforeFile.ext)(confBeforeFile.data);

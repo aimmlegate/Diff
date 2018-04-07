@@ -1,10 +1,12 @@
+// @flow
+
 import _ from 'lodash';
 
 const infoChar = { add: ' + ', remov: ' - ', none: '   ' };
 
 const genSpace = spaces => ' '.repeat(spaces);
 
-const renderObj = (val, localDeep) => {
+const renderObj = (val: any, localDeep: string) => {
   if (!_.isObject(val)) return val;
   const keys = _.keys(val);
   const values = keys.map(key =>
@@ -12,21 +14,21 @@ const renderObj = (val, localDeep) => {
   return `{\n${values}\n${localDeep.slice(1)}}`;
 };
 
-const render = (ast, deep = '') => {
+const render = (ast: Object, deep: string = '') => {
   const moreDeep = deep + genSpace(4);
   const getStrGen = {
-    nested: node =>
+    nested: (node: Object) =>
       [
         `${deep}${infoChar.none}${node.key}: {`,
         `${render(node.children, moreDeep)}\n${deep}${infoChar.none}}`,
       ],
-    added: node =>
+    added: (node: Object) =>
       [`${deep}${infoChar.add}${node.key}: ${renderObj(node.value, moreDeep)}`],
-    deleted: node =>
+    deleted: (node: Object) =>
       [`${deep}${infoChar.remov}${node.key}: ${renderObj(node.value, moreDeep)}`],
-    unchanged: node =>
+    unchanged: (node: Object) =>
       [`${deep}${infoChar.none}${node.key}: ${renderObj(node.value, moreDeep)}`],
-    updated: node =>
+    updated: (node: Object) =>
       [
         `${deep}${infoChar.add}${node.key}: ${renderObj(node.value, moreDeep)}`,
         `${deep}${infoChar.remov}${node.key}: ${renderObj(node.oldValue, moreDeep)}`,

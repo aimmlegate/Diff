@@ -1,6 +1,8 @@
+// @flow
+
 import _ from 'lodash';
 
-const buildAst = (before, after) => {
+const buildAst = (before: Object, after: Object) => {
   const keys = _.union(_.keys(before), _.keys(after));
   return keys.map((key) => {
     if (_.isObject(before[key]) && _.isObject(after[key])) {

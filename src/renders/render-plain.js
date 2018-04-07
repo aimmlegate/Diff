@@ -1,13 +1,14 @@
+// @flow
 import _ from 'lodash';
 
-const render = (ast, name = '') => {
+const render = (ast: Object, name: string = '') => {
   const getStrGen = {
-    added: (node) => {
+    added: (node: Object) => {
       const valueStr = (_.isObject(node.value)) ? 'with complex value' : `with value: '${node.value}'`;
       return `Property ${name}${node.key} was added ${valueStr}`;
     },
-    deleted: node => `Property ${name}${node.key} was removed`,
-    updated: (node) => {
+    deleted: (node: Object) => `Property ${name}${node.key} was removed`,
+    updated: (node: Object) => {
       const valueStr = (_.isObject(node.value)) ? 'complex value' : `'${node.value}'`;
       const valueOldStr = (_.isObject(node.oldValue)) ? 'From complex value' : `From: '${node.oldValue}'`;
       return `Property ${name}${node.key} was updated. ${valueOldStr} to ${valueStr}`;
