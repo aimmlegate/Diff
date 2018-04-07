@@ -5,7 +5,7 @@ import path from 'path';
 import ini from 'ini';
 import { safeLoad } from 'js-yaml';
 import buildDiff from './buid-diff';
-import { renderTree, renderPlain } from './renders';
+import { renderTree, renderPlain, renderJson } from './renders';
 
 const readFile = (filePatch: string) => {
   const data = fs.readFileSync(filePatch).toString();
@@ -36,5 +36,6 @@ export default (path1: string, path2: string, output: string = 'tree') => {
   const after = getParse(confAfterFile.ext)(confAfterFile.data);
   const diff = buildDiff(before, after);
   if (output === 'plain') return renderPlain(diff);
+  if (output === 'json') return renderJson(diff);
   return renderTree(diff);
 };
