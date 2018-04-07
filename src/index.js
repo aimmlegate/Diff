@@ -5,7 +5,7 @@ import path from 'path';
 import ini from 'ini';
 import { safeLoad } from 'js-yaml';
 import buildDiff from './buid-diff';
-import { renderTree, renderPlain, renderJson } from './renders';
+import getRender from './renders';
 
 const readFile = (filePatch: string) => {
   const data = fs.readFileSync(filePatch).toString();
@@ -27,21 +27,6 @@ const getParse = (format: string) => (data: any) => {
   }
   return parse(data);
 };
-
-const renders = {
-  tree: renderTree,
-  plain: renderPlain,
-  json: renderJson,
-};
-
-const getRender = (renderType: string) => (data: any) => {
-  const render = renders[renderType];
-  if (!render) {
-    throw new Error(`unkown render: ${render}`);
-  }
-  return render(data);
-};
-
 
 export default (path1: string, path2: string, output: string = 'tree') => {
   const confBeforeFile = readFile(path1);
