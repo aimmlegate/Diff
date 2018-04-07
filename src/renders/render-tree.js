@@ -17,8 +17,11 @@ const renderObj = (val: any, localDeep: string) => {
 const render = (ast: Object, deep: string = '') => {
   const moreDeep = deep + genSpace(4);
   const getStrGen = {
-    nested: (node: Object) =>
-      `${deep}${infoChar.none}${node.key}: {\n${render(node.children, moreDeep)}\n${deep}${infoChar.none}}`,
+    nested: (node: Object) => {
+      const strDiffTitle = `${deep}${infoChar.none}${node.key}: {`;
+      const strDiffCont = `${render(node.children, moreDeep)}\n${deep}${infoChar.none}}`;
+      return `${strDiffTitle}\n${strDiffCont}`;
+    },
     added: (node: Object) =>
       `${deep}${infoChar.add}${node.key}: ${renderObj(node.value, moreDeep)}`,
     deleted: (node: Object) =>
