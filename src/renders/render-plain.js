@@ -14,10 +14,13 @@ const render = (ast: Object, name: string = '') => {
       return `Property '${name}${node.key}' was updated. ${valueOldStr} to ${valueStr}`;
     },
     nested: node => render(node.children, `${name}${node.key}.`),
-    unchanged: () => '',
   };
-  const resultArray = ast.reduce((acc, el) => [...acc, getStrGen[el.type](el)], []);
-  return `${_.flatten(resultArray).filter(el => (!(el === ''))).join('\n')}`;
+  const filterUnchange = (obj: Object) => obj.filter((node) => {
+    if (node.type === 'nested') return filterUnchange(node.children);
+    return !(node.type === 'unchanged');
+  });
+  const resultArray = filterUnchange(ast).reduce((acc, el) => [...acc, getStrGen[el.type](el)], []);
+  return `${_.flatten(resultArray).join('\n')}`;
 };
 
 export default (diff: Object) => render(diff);
