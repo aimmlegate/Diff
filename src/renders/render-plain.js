@@ -13,7 +13,7 @@ const render = (ast: Object, name: string = '') => {
       const valueOldStr = (_.isObject(node.oldValue)) ? 'From complex value' : `From: '${node.oldValue}'`;
       return `Property ${name}${node.key} was updated. ${valueOldStr} to ${valueStr}`;
     },
-    nested: node => render(node.children, `${node.key}.`),
+    nested: node => render(node.children, `${name}${node.key}.`),
     unchanged: () => '',
   };
   const resultArray = ast.reduce((acc, el) => [...acc, getStrGen[el.type](el)], []);
