@@ -28,6 +28,20 @@ const getParse = (format: string) => (data: any) => {
   return parse(data);
 };
 
+const renders = {
+  tree: renderTree,
+  plain: renderPlain,
+  json: renderJson,
+};
+
+const getRender = (renderType: string) => (data: any) => {
+  const render = renders[renderType];
+  if (!render) {
+    throw new Error(`unkown render: ${render}`);
+  }
+  return render(data);
+};
+
 
 export default (path1: string, path2: string, output: string = 'tree') => {
   const confBeforeFile = readFile(path1);
@@ -35,7 +49,5 @@ export default (path1: string, path2: string, output: string = 'tree') => {
   const before = getParse(confBeforeFile.ext)(confBeforeFile.data);
   const after = getParse(confAfterFile.ext)(confAfterFile.data);
   const diff = buildDiff(before, after);
-  if (output === 'plain') return renderPlain(diff);
-  if (output === 'json') return renderJson(diff);
-  return renderTree(diff);
+  return getRender(output)(diff);
 };

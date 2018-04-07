@@ -30,7 +30,7 @@ const render = (ast: Object, deep: string = '') => {
       [`${deep}${infoChar.none}${node.key}: ${renderObj(node.value, moreDeep)}`],
     updated: (node: Object) =>
       [
-        `${deep}${infoChar.add}${node.key}: ${renderObj(node.value, moreDeep)}`,
+        `${deep}${infoChar.add}${node.key}: ${renderObj(node.newValue, moreDeep)}`,
         `${deep}${infoChar.remov}${node.key}: ${renderObj(node.oldValue, moreDeep)}`,
       ],
   };

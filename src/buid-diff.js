@@ -20,7 +20,7 @@ const buildAst = (before: Object, after: Object) => {
     return {
       key,
       type: 'updated',
-      value: after[key],
+      newValue: after[key],
       oldValue: before[key],
     };
   });

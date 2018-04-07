@@ -9,7 +9,7 @@ const render = (ast: Object, name: string = '') => {
     },
     deleted: (node: Object) => `Property '${name}${node.key}' was removed`,
     updated: (node: Object) => {
-      const valueStr = (_.isObject(node.value)) ? 'complex value' : `'${node.value}'`;
+      const valueStr = (_.isObject(node.newValue)) ? 'complex value' : `'${node.newValue}'`;
       const valueOldStr = (_.isObject(node.oldValue)) ? 'From complex value' : `From: '${node.oldValue}'`;
       return `Property '${name}${node.key}' was updated. ${valueOldStr} to ${valueStr}`;
     },
