@@ -38,4 +38,4 @@ const render = (ast: Object, deep: string = '') => {
   return `${_.flatten(resultArray).join('\n')}`;
 };
 
-export default diff => `{\n${render(diff)}\n}`;
+export default (diff: Object) => `{\n${render(diff)}\n}`;

@@ -20,4 +20,4 @@ const render = (ast: Object, name: string = '') => {
   return `${_.flatten(resultArray).filter(el => (!(el === ''))).join('\n')}`;
 };
 
-export default diff => render(diff);
+export default (diff: Object) => render(diff);
