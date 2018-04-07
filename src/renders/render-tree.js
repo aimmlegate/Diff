@@ -35,7 +35,7 @@ const render = (ast: Object, deep: string = '') => {
     },
   };
   const resultArray = ast.map(el => [getStrGen[el.type](el)]);
-  return `${_.flatten(resultArray).join('\n')}`;
+  return `${resultArray.join('\n')}`;
 };
 
 export default (diff: Object) => `{\n${render(diff)}\n}`;

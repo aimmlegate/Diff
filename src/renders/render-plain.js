@@ -20,7 +20,7 @@ const render = (ast: Object, name: string = '') => {
     return !(node.type === 'unchanged');
   });
   const resultArray = filterUnchange(ast).map(el => [getStrGen[el.type](el)]);
-  return `${_.flatten(resultArray).join('\n')}`;
+  return `${resultArray.join('\n')}`;
 };
 
 export default (diff: Object) => render(diff);
