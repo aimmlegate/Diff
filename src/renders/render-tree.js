@@ -31,11 +31,11 @@ const render = (ast: Object, deep: string = '') => {
     updated: (node: Object) => {
       const newStr = `${deep}${infoChar.add}${node.key}: ${renderObj(node.newValue, moreDeep)}`;
       const oldStr = `${deep}${infoChar.remov}${node.key}: ${renderObj(node.oldValue, moreDeep)}`;
-      return `${newStr}\n${oldStr}`;
+      return [newStr, oldStr];
     },
   };
   const resultArray = ast.map(el => [getStrGen[el.type](el)]);
-  return `${resultArray.join('\n')}`;
+  return `${_.flattenDeep(resultArray).join('\n')}`;
 };
 
 export default (diff: Object) => `{\n${render(diff)}\n}`;
