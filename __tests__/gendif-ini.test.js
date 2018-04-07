@@ -18,3 +18,9 @@ test('plain-render-ini', () => {
   const received = gendif('__tests__/__fixtures__/ini/before.ini', '__tests__/__fixtures__/ini/after.ini', 'plain');
   expect(received).toEqual(fs.readFileSync(expected, 'utf-8'));
 });
+
+test('json-render-ini', () => {
+  const expected = '__tests__/__fixtures__/result-json.txt';
+  const received = gendif('__tests__/__fixtures__/ini/before.ini', '__tests__/__fixtures__/ini/after.ini', 'json');
+  expect(received).toEqual(fs.readFileSync(expected, 'utf-8'));
+});

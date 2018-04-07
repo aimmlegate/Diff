@@ -18,3 +18,9 @@ test('yaml-render-plain', () => {
   const received = gendif('__tests__/__fixtures__/yml/before.yaml', '__tests__/__fixtures__/yml/after.yaml', 'plain');
   expect(received).toEqual(fs.readFileSync(expected, 'utf-8'));
 });
+
+test('json-render-json', () => {
+  const expected = '__tests__/__fixtures__/result-json.txt';
+  const received = gendif('__tests__/__fixtures__/yml/before.yaml', '__tests__/__fixtures__/yml/after.yaml', 'json');
+  expect(received).toEqual(fs.readFileSync(expected, 'utf-8'));
+});
