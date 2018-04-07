@@ -18,23 +18,20 @@ const render = (ast: Object, deep: string = '') => {
   const moreDeep = deep + genSpace(4);
   const getStrGen = {
     nested: (node: Object) =>
-      [
-        `${deep}${infoChar.none}${node.key}: {`,
-        `${render(node.children, moreDeep)}\n${deep}${infoChar.none}}`,
-      ],
+      `${deep}${infoChar.none}${node.key}: {\n${render(node.children, moreDeep)}\n${deep}${infoChar.none}}`,
     added: (node: Object) =>
-      [`${deep}${infoChar.add}${node.key}: ${renderObj(node.value, moreDeep)}`],
+      `${deep}${infoChar.add}${node.key}: ${renderObj(node.value, moreDeep)}`,
     deleted: (node: Object) =>
-      [`${deep}${infoChar.remov}${node.key}: ${renderObj(node.value, moreDeep)}`],
+      `${deep}${infoChar.remov}${node.key}: ${renderObj(node.value, moreDeep)}`,
     unchanged: (node: Object) =>
-      [`${deep}${infoChar.none}${node.key}: ${renderObj(node.value, moreDeep)}`],
-    updated: (node: Object) =>
-      [
-        `${deep}${infoChar.add}${node.key}: ${renderObj(node.newValue, moreDeep)}`,
-        `${deep}${infoChar.remov}${node.key}: ${renderObj(node.oldValue, moreDeep)}`,
-      ],
+      `${deep}${infoChar.none}${node.key}: ${renderObj(node.value, moreDeep)}`,
+    updated: (node: Object) => {
+      const newStr = `${deep}${infoChar.add}${node.key}: ${renderObj(node.newValue, moreDeep)}`;
+      const oldStr = `${deep}${infoChar.remov}${node.key}: ${renderObj(node.oldValue, moreDeep)}`;
+      return `${newStr}\n${oldStr}`;
+    },
   };
-  const resultArray = ast.reduce((acc, el) => [...acc, getStrGen[el.type](el)], []);
+  const resultArray = ast.map(el => [getStrGen[el.type](el)]);
   return `${_.flatten(resultArray).join('\n')}`;
 };
 
