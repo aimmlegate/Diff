@@ -19,7 +19,7 @@ const render = (ast: Object, name: string = '') => {
     if (node.type === 'nested') return filterUnchange(node.children);
     return !(node.type === 'unchanged');
   });
-  const resultArray = filterUnchange(ast).reduce((acc, el) => [...acc, getStrGen[el.type](el)], []);
+  const resultArray = filterUnchange(ast).map(el => [getStrGen[el.type](el)]);
   return `${_.flatten(resultArray).join('\n')}`;
 };
 
